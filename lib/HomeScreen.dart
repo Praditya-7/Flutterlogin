@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:userauth/Methods.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
@@ -18,29 +19,14 @@ class HomeScreen extends StatelessWidget {
             height: size.height/20,
             width: size.width/20,
             alignment: Alignment.center,
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-              ),
+            child: ElevatedButton(
+              child: Text("logOut"),
+              onPressed: ()=> logout(context),
             ),
           ),
           SizedBox(
             height: size.height/20,
           ),
-          Container(
-            height: size.height/20,
-            width: size.width/20,
-            alignment: Alignment.center,
-            child: ElevatedButton(
-              child: Text("Search"),
-              onPressed: (){
-                
-              },
-            ),
-          )
         ],
       )
     );

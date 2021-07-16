@@ -11,6 +11,8 @@ class CreateAccount extends StatefulWidget {
   @override
   _CreateAccountState createState() => _CreateAccountState();
 
+  verifyOTP(TextEditingController otpCont) {}
+
 }
 
 class _CreateAccountState extends State<CreateAccount> {
