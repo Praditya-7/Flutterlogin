@@ -11,14 +11,12 @@ class CreateAccount extends StatefulWidget {
   @override
   _CreateAccountState createState() => _CreateAccountState();
 
-  verifyOTP(TextEditingController otpCont) {}
-
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  static final TextEditingController _name=TextEditingController();
-  static final  TextEditingController email=TextEditingController();
-  static final TextEditingController _password=TextEditingController();
+   final TextEditingController _name=TextEditingController();
+   final  TextEditingController email=TextEditingController();
+   final TextEditingController _password=TextEditingController();
   bool isLoading=false;
 
   void sendOTP() async{
@@ -30,10 +28,6 @@ class _CreateAccountState extends State<CreateAccount> {
     else{
       print("OTP sent");
     }
-  }
-
-   bool verifyOTP(TextEditingController otpCont){
-    return (EmailAuth.validate(receiverMail: email.value.text, userOTP: otpCont.value.text));
   }
 
   @override
@@ -151,7 +145,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 });
                 print("Account Created");
                 sendOTP();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyEmail()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyEmail(email: email,)));
               }
               else{
                 print("Account creation failed");

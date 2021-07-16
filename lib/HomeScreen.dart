@@ -11,13 +11,16 @@ class HomeScreen extends StatelessWidget {
         title: Text("Welcome"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: size.height/20,
           ),
+          Center(child: Text("this is home Screen"),),
           Container(
             height: size.height/20,
-            width: size.width/20,
+            width: size.width/1.1,
             alignment: Alignment.center,
             child: ElevatedButton(
               child: Text("logOut"),
