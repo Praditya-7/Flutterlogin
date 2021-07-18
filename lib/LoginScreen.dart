@@ -26,15 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: size.height / 20,
-            ),
-            Container(
-                alignment: Alignment.centerLeft,
-                width: size.width / 1.2,
-                child:
-                    IconButton(icon: Icon(Icons.arrow_back), onPressed: () {})),
-            SizedBox(
-              height: size.height / 20,
+              height: size.height / 5,
             ),
             Container(
               width: size.width/1.3,
@@ -74,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: (){
                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateAccount()));
+                //Navigator.pushNamed(context, CreateAccount.route);
               },
               child: Text("create account",
               style: TextStyle(
@@ -89,37 +82,48 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget field(Size size,String hint,IconData icon,TextEditingController cont){
-    return Center(
-      child: Container(
-        width: size.width/1.1,
-        height: size.height/14,
-        child: TextField(
-          controller: cont,
-          textAlignVertical:TextAlignVertical.center,
-          decoration: InputDecoration(
-            alignLabelWithHint:true,
-            prefixIcon: Icon(icon),
-            hintText: hint,
-            hintStyle: TextStyle(
-              color: Colors.grey,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            )
+    return Container(
+      padding: EdgeInsets.only(left: 20.0),
+      width: size.width/1.1,
+      height: size.height/14,
+      child: TextField(
+        controller: cont,
+        textAlignVertical:TextAlignVertical.center,
+        decoration: InputDecoration(
+          alignLabelWithHint:true,
+          prefixIcon: Icon(icon),
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: Colors.grey,
           ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          )
         ),
       ),
     );
   }
 
   Widget customButton(Size size){
-    return GestureDetector(
-      onTap: (){
-        if(_email.text.isNotEmpty && _password.text.isNotEmpty){
-            setState(() {
-              isLoading=true;
-            });
-            login(_email.text, _password.text).then((user){
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(width: 125,height: 50),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.purple,
+          ),
+          child: Text("Login",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22.0
+          ),
+          ),
+          onPressed: (){
+            if(_email.text.isNotEmpty && _password.text.isNotEmpty){
+              setState(() {
+                isLoading=true;
+              });
+              login(_email.text, _password.text).then((user){
                 if(user!= null){
                   print("Login Successful");
                   setState(() {
@@ -136,25 +140,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     isLoading=false;
                   });
                 }
-            });
-        }
-        else{
-          print("Enter the required Credentials");
-        }
-      },
-      child: Container(
-        width: size.width/1.2,
-        height: size.height/14,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.deepPurpleAccent,
+              });
+            }
+            else{
+              print("Enter the required Credentials");
+            }
+          },
         ),
-        alignment: Alignment.center,
-        child: Text("login",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 22,
-        ),),
       ),
     );
   }

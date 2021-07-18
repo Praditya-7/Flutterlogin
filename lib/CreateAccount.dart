@@ -6,8 +6,6 @@ import 'package:userauth/verifyEmail.dart';
 
 
 class CreateAccount extends StatefulWidget {
-  const CreateAccount({Key key}) : super(key: key);
-
   @override
   _CreateAccountState createState() => _CreateAccountState();
 
@@ -95,6 +93,7 @@ class _CreateAccountState extends State<CreateAccount> {
         GestureDetector(
           onTap: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (_)=>LoginScreen()));
+            //Navigator.pushNamed(context, LoginScreen.route);
           },
           child: Text("Login",
             style: TextStyle(
@@ -138,22 +137,8 @@ class _CreateAccountState extends State<CreateAccount> {
           setState(() {
             isLoading=true;
           });
-          createAccount(_name.text, email.text, _password.text).then((user){
-              if(user!=null){
-                setState(() {
-                  isLoading=false;
-                });
-                print("Account Created");
-                sendOTP();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>VerifyEmail(email: email,)));
-              }
-              else{
-                print("Account creation failed");
-                setState(() {
-                  isLoading=false;
-                });
-              }
-          });
+          sendOTP();
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>VerifyEmail(name: _name,email: email,password: _password,)), (context) => false);
         }
         else{
           print("Enter the required Fields");
